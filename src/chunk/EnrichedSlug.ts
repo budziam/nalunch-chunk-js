@@ -1,5 +1,5 @@
-import { ChunkService } from "./ChunkService";
 import { Coordinates } from "../types";
+import { createEnrichedSlug, parseEnrichedSlug } from "./enrichedSlugUtils";
 
 export class EnrichedSlug {
     public constructor(public readonly slug: string, public readonly coordinates: Coordinates) {
@@ -7,7 +7,7 @@ export class EnrichedSlug {
     }
 
     public static fromString(enrichedSlug: string): EnrichedSlug | undefined {
-        const tuple = new ChunkService().parseEnrichedSlug(enrichedSlug);
+        const tuple = parseEnrichedSlug(enrichedSlug);
 
         if (tuple === undefined) {
             return undefined;
@@ -17,6 +17,6 @@ export class EnrichedSlug {
     }
 
     public toString(): string {
-        return new ChunkService().createEnrichedSlug(this.slug, this.coordinates);
+        return createEnrichedSlug(this.slug, this.coordinates);
     }
 }

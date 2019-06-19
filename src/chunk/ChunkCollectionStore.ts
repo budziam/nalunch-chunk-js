@@ -2,7 +2,6 @@ import * as moment from "moment";
 import { Moment } from "moment";
 import { ChunkStore } from "./ChunkStore";
 import { Coordinates } from "../types";
-import { ChunkService } from "./ChunkService";
 import { boundMethod } from "autobind-decorator";
 import { LunchOffer } from "../models";
 import { DATE_FORMAT } from "../constants";
@@ -10,13 +9,20 @@ import { NaLunchApi } from "../NaLunchApi";
 import { LunchOfferStore } from "./LunchOfferStore";
 import { ChunkStoreFactory } from "./ChunkStoreFactory";
 import { EnrichedSlug } from "./EnrichedSlug";
+import { calculateChunksCoordinates } from "./chunkUtils";
+import { applyPrecision } from "./operations";
+
+const generateChunkStoreKey = (coordinates: Coordinates, date: Moment): string => {
+    const latitude = applyPrecision(coordinates.latitude);
+    const longitude = applyPrecision(coordinates.longitude);
+    return `${date.format(DATE_FORMAT)}#${latitude},${longitude}`;
+};
 
 export class ChunkCollectionStore {
     private readonly chunksStores: Map<string, ChunkStore> = new Map();
 
     public constructor(
         private readonly api: NaLunchApi,
-        private readonly chunkService: ChunkService,
         private readonly chunkStoreFactory: ChunkStoreFactory,
     ) {
         //
@@ -80,24 +86,18 @@ export class ChunkCollectionStore {
         date: Moment,
         radius: number,
     ): ChunkStore[] {
-        return [...this.chunkService.calculateChunksCoordinates(coordinates, radius)].map(
-            chunkCoordinates => this.getOrCreateChunkStore(date.clone(), chunkCoordinates),
+        return [...calculateChunksCoordinates(coordinates, radius)].map(chunkCoordinates =>
+            this.getOrCreateChunkStore(date.clone(), chunkCoordinates),
         );
     }
 
     private getOrCreateChunkStore(date: Moment, coordinates: Coordinates): ChunkStore {
-        const key = this.generateChunkStoreKey(coordinates, date);
+        const key = generateChunkStoreKey(coordinates, date);
 
         if (!this.chunksStores.has(key)) {
             this.chunksStores.set(key, this.chunkStoreFactory.create(coordinates, date));
         }
 
         return this.chunksStores.get(key);
-    }
-
-    private generateChunkStoreKey(coordinates: Coordinates, date: Moment): string {
-        const latitude = this.chunkService.applyPrecision(coordinates.latitude);
-        const longitude = this.chunkService.applyPrecision(coordinates.longitude);
-        return `${date.format(DATE_FORMAT)}#${latitude},${longitude}`;
     }
 }

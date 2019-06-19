@@ -10,6 +10,7 @@ import { LunchOfferStore } from "./LunchOfferStore";
 
 const MAX_CHUNK_AGE_IN_SECONDS = 180;
 
+// TODO Implement it
 const adaptLunchOffer = (): any => ({});
 
 const generateLunchOfferStoreKey = (date: Moment, slug: string): string =>
