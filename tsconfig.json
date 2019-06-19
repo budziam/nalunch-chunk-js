@@ -5,6 +5,7 @@
     "module": "commonjs",
     "outDir": "./lib",
     "alwaysStrict": true,
+    "declaration": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
