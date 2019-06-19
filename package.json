@@ -8,6 +8,7 @@
     "build": "tsc",
     "lint": "tslint -p tsconfig.json -t stylish",
     "lint:fix": "yarn lint --fix",
+    "postinstall": "tsc",
     "pretty": "prettier './src/**/*.{ts,tsx}' './__tests__/**/*.{ts,tsx}' --check",
     "pretty:fix": "yarn pretty --write",
     "test": "jest"
