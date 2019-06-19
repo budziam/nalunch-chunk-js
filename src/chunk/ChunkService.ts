@@ -37,8 +37,8 @@ export class ChunkService {
         }
     }
 
-    public parseEnrichedSlug(slug: string): [string, Coordinates] | undefined {
-        const splitted = slug.split(",");
+    public parseEnrichedSlug(enrichedSlug: string): [string, Coordinates] | undefined {
+        const splitted = enrichedSlug.split(",");
 
         if (splitted.length < 2) {
             return undefined;
@@ -58,6 +58,7 @@ export class ChunkService {
         return `${slug},${chunkId}`;
     }
 
+    // TODO Extract it
     private calculateChunkId(coordinates: Coordinates): number {
         const roundedLatitude = this.roundDownToPrecision(coordinates.latitude);
         const roundedLongitude = this.roundDownToPrecision(coordinates.longitude);

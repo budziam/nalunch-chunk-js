@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/7477003/calculating-new-longitude-latitude-from-old-n-meters
-import { Coordinates } from "./types";
+import { Coordinates } from "../types";
 
 const EARTH_RADIUS = 6378137;
 

@@ -1,6 +1,6 @@
-import { ChunkService, Coordinates } from "../src";
 import * as jsc from "jsverify";
-import { CHUNK_SIZE } from "../src/ChunkService";
+import { ChunkService, Coordinates } from "../../src";
+import { CHUNK_SIZE } from "../../src/chunk/ChunkService";
 
 describe("ChunkService", () => {
     let chunkService: ChunkService;

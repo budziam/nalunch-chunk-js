@@ -9,6 +9,7 @@ import { DATE_FORMAT } from "../constants";
 import { NaLunchApi } from "../NaLunchApi";
 import { LunchOfferStore } from "./LunchOfferStore";
 import { ChunkStoreFactory } from "./ChunkStoreFactory";
+import { EnrichedSlug } from "./EnrichedSlug";
 
 export class ChunkCollectionStore {
     private readonly chunksStores: Map<string, ChunkStore> = new Map();
@@ -45,27 +46,26 @@ export class ChunkCollectionStore {
 
     @boundMethod
     public async load(coordinates: Coordinates, date: Moment, radius: number): Promise<void> {
-        await Promise.all(this.getMatchingChunkStores(coordinates, date, radius).map(chunkStore => chunkStore.load()))
+        await Promise.all(
+            this.getMatchingChunkStores(coordinates, date, radius).map(chunkStore =>
+                chunkStore.load(),
+            ),
+        );
     }
 
-    // TODO Think about enrichedSlug as object
     @boundMethod
-    public getLunchOfferStore(date: Moment, enrichedSlug: string): LunchOfferStore | undefined {
-        const tuple = this.chunkService.parseEnrichedSlug(enrichedSlug);
-
-        if (tuple === undefined) {
-            return undefined;
-        }
-
-        const [slug, coordinates] = tuple;
-        const chunkStore = this.getOrCreateChunkStore(date, coordinates);
-        const lunchOfferStore = chunkStore.getLunchOfferStore(date, slug);
+    public getLunchOfferStore(
+        date: Moment,
+        enrichedSlug: EnrichedSlug,
+    ): LunchOfferStore | undefined {
+        const chunkStore = this.getOrCreateChunkStore(date, enrichedSlug.coordinates);
+        const lunchOfferStore = chunkStore.getLunchOfferStore(date, enrichedSlug.slug);
 
         if (lunchOfferStore) {
             return lunchOfferStore;
         }
 
-        return chunkStore.createLunchOfferStore(date, slug);
+        return chunkStore.createLunchOfferStore(date, enrichedSlug.slug);
     }
 
     @boundMethod

@@ -1,20 +1,16 @@
-import { AxiosInstance } from "axios";
+import Axios, { AxiosInstance } from "axios";
 import { Moment } from "moment";
 import * as qs from "qs";
-import Axios from "axios";
 import { boundMethod } from "autobind-decorator";
 import { DATE_FORMAT } from "./constants";
 import { Coordinates, Dict } from "./types";
 import { stringifyCoordinates, trimSlashes } from "./utils";
 
-const url = (path: string, query: Dict<any> = {}): string => {
-    return `https://api.nalunch.com/${trimSlashes(path)}?${qs.stringify(query)}`;
-};
+const url = (path: string, query: Dict<any> = {}): string =>
+    `https://api.nalunch.com/${trimSlashes(path)}?${qs.stringify(query)}`;
 
 export class NaLunchApi {
-    public constructor(
-        private readonly axios: AxiosInstance = Axios,
-    ) {
+    public constructor(private readonly axios: AxiosInstance = Axios) {
         //
     }
 

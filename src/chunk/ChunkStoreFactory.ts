@@ -5,7 +5,10 @@ import { Moment } from "moment";
 import { boundMethod } from "autobind-decorator";
 
 export class ChunkStoreFactory {
-    public constructor(private readonly api: NaLunchApi, private readonly errorHandler: ErrorHandler) {
+    public constructor(
+        private readonly api: NaLunchApi,
+        private readonly errorHandler: ErrorHandler,
+    ) {
         //
     }
 

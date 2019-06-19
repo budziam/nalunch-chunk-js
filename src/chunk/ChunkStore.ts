@@ -1,16 +1,19 @@
 import { Moment } from "moment";
 import { AxiosError } from "axios";
+import { boundMethod } from "autobind-decorator";
+import * as moment from "moment";
 import { DATE_FORMAT } from "../constants";
 import { Coordinates, ErrorHandler } from "../types";
 import { NaLunchApi } from "../NaLunchApi";
 import { LunchOffer } from "../models";
-import { boundMethod } from "autobind-decorator";
-import * as moment from "moment";
 import { LunchOfferStore } from "./LunchOfferStore";
 
 const MAX_CHUNK_AGE_IN_SECONDS = 180;
 
-const generateLunchOfferStoreKey = (date: Moment, slug: string): string => `${date.format(DATE_FORMAT)}#${slug}`;
+const adaptLunchOffer = (): any => ({});
+
+const generateLunchOfferStoreKey = (date: Moment, slug: string): string =>
+    `${date.format(DATE_FORMAT)}#${slug}`;
 
 export class ChunkStore {
     public isLoading: boolean = false;
