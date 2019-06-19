@@ -27,4 +27,8 @@ export class LunchOffer {
         const slug = createEnrichedSlug(this.business.slug, this.business.location.coordinates);
         return `/${city}/${date}/${slug}`;
     }
+
+    public get isEmpty(): boolean {
+        return this.foods.length === 0;
+    }
 }

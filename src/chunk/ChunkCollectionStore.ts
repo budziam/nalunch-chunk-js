@@ -51,12 +51,16 @@ export class ChunkCollectionStore {
     }
 
     @boundMethod
-    public async load(coordinates: Coordinates, date: Moment, radius: number): Promise<void> {
-        await Promise.all(
-            this.getMatchingChunkStores(coordinates, date, radius).map(chunkStore =>
-                chunkStore.load(),
-            ),
+    public async load(
+        coordinates: Coordinates,
+        date: Moment,
+        radiusInMeters: number,
+    ): Promise<void> {
+        const promises = this.getMatchingChunkStores(coordinates, date, radiusInMeters).map(
+            chunkStore => chunkStore.load(),
         );
+
+        await Promise.all(promises);
     }
 
     @boundMethod
