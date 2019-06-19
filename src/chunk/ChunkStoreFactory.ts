@@ -1,6 +1,6 @@
 import { ChunkStore } from "./ChunkStore";
 import { Coordinates, ErrorHandler } from "../types";
-import { NaLunchApi } from "../NaLunchApi";
+import { NaLunchApi } from "../api/NaLunchApi";
 import { Moment } from "moment";
 import { boundMethod } from "autobind-decorator";
 

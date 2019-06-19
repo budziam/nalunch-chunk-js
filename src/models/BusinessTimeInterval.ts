@@ -1,7 +1,7 @@
 import { Moment } from "moment";
 import { timeToDate } from "../timeUtils";
 
-export enum HourTypeKey {
+export enum TimeIntervalType {
     Lunch = "lunch",
     Opening = "opening",
 }
@@ -10,7 +10,7 @@ export class BusinessTimeInterval {
     public readonly startTime?: number;
     public readonly endTime?: number;
     public readonly day: number;
-    public readonly type: HourTypeKey;
+    public readonly type: TimeIntervalType;
 
     public constructor(data: Partial<BusinessTimeInterval> = {}) {
         Object.assign(this, data);

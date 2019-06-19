@@ -4,14 +4,12 @@ import { boundMethod } from "autobind-decorator";
 import * as moment from "moment";
 import { DATE_FORMAT } from "../constants";
 import { Coordinates, ErrorHandler } from "../types";
-import { NaLunchApi } from "../NaLunchApi";
 import { LunchOffer } from "../models";
 import { LunchOfferStore } from "./LunchOfferStore";
+import { NaLunchApi } from "../api/NaLunchApi";
+import { adaptLunchOffer } from "../api/adapters";
 
 const MAX_CHUNK_AGE_IN_SECONDS = 180;
-
-// TODO Implement it
-const adaptLunchOffer = (): any => ({});
 
 const generateLunchOfferStoreKey = (date: Moment, slug: string): string =>
     `${date.format(DATE_FORMAT)}#${slug}`;

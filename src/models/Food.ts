@@ -9,11 +9,11 @@ export enum FoodType {
 }
 
 export class Food {
-    public id?: number;
-    public name?: string;
-    public price?: number;
-    public type?: FoodType = FoodType.Lunch;
-    public date?: Moment;
+    public readonly id: number;
+    public readonly name: string;
+    public readonly price?: number;
+    public readonly type: FoodType = FoodType.Lunch;
+    public readonly date: Moment;
 
     public constructor(data: Partial<Food> = {}) {
         Object.assign(this, data);

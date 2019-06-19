@@ -5,7 +5,7 @@ import { Coordinates } from "../types";
 import { boundMethod } from "autobind-decorator";
 import { LunchOffer } from "../models";
 import { DATE_FORMAT } from "../constants";
-import { NaLunchApi } from "../NaLunchApi";
+import { NaLunchApi } from "../api/NaLunchApi";
 import { LunchOfferStore } from "./LunchOfferStore";
 import { ChunkStoreFactory } from "./ChunkStoreFactory";
 import { EnrichedSlug } from "./EnrichedSlug";
