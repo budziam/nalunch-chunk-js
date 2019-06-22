@@ -1,6 +1,6 @@
 import { Moment } from "moment";
 import { Business } from "./Business";
-import { Food } from "./Food";
+import { Food, FoodType } from "./Food";
 import { Publication } from "./Publication";
 import { DATE_FORMAT } from "../constants";
 import { slugify } from "../utils";
@@ -26,6 +26,14 @@ export class LunchOffer {
         const date = this.date.format(DATE_FORMAT);
         const slug = createEnrichedSlug(this.business.slug, this.business.location.coordinates);
         return `/${city}/${date}/${slug}`;
+    }
+
+    public get soups(): Food[] {
+        return this.foods.filter(food => food.type === FoodType.Soup);
+    }
+
+    public get lunches(): Food[] {
+        return this.foods.filter(food => food.type === FoodType.Lunch);
     }
 
     public get isEmpty(): boolean {
