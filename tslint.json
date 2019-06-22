@@ -36,6 +36,7 @@
     "ordered-imports": false,
     "prefer-function-over-method": false,
     "strict-boolean-expressions": false,
+    "strict-comparisons": false,
     "typedef": [
       true,
       "call-signature",

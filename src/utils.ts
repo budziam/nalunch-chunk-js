@@ -30,3 +30,27 @@ export const slugify = (text: string): string =>
         .replace(/[^A-Za-z0-9]+/g, "-");
 
 export const nullToUndefined = <T>(value: T): T => (value === null ? undefined : value);
+
+export const compare = (a: any, b: any, asc: boolean = true): number => {
+    if (a === b) {
+        return 0;
+    }
+
+    if (a === undefined) {
+        return 1;
+    }
+
+    if (b === undefined) {
+        return -1;
+    }
+
+    if (b > a) {
+        return asc ? -1 : 1;
+    }
+
+    if (a > b) {
+        return asc ? 1 : -1;
+    }
+
+    return 0;
+};
