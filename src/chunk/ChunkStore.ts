@@ -126,25 +126,21 @@ export class ChunkStore {
     }
 
     private applyLunchOffers(lunchOffers: LunchOffer[]): void {
+        const cloned = new Map(this.lunchOffersStores.entries());
         this.lunchOffersStores.clear();
 
         for (const lunchOffer of lunchOffers) {
-            this.createLunchOfferStoreFromLunchOffer(lunchOffer);
+            const key = generateLunchOfferStoreKey(this._date, lunchOffer.business.slug);
+            const store: LunchOfferStore = cloned.has(key)
+                ? cloned.get(key)
+                : new LunchOfferStore(this);
+
+            store.setLunchOffer(lunchOffer);
+            this.lunchOffersStores.set(key, store);
         }
 
         this.error = undefined;
         this.isLoading = false;
         this._loadedAt = moment();
-    }
-
-    private createLunchOfferStoreFromLunchOffer(lunchOffer: LunchOffer): void {
-        const key = generateLunchOfferStoreKey(this._date, lunchOffer.business.slug);
-
-        if (this.lunchOffersStores.has(key)) {
-            this.lunchOffersStores.get(key).setLunchOffer(lunchOffer);
-        } else {
-            const store = new LunchOfferStore(this, lunchOffer);
-            this.lunchOffersStores.set(key, store);
-        }
     }
 }
