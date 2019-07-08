@@ -6,7 +6,7 @@ import { DATE_FORMAT } from "../constants";
 import { Coordinates, ErrorHandler } from "../types";
 import { LunchOffer } from "../models";
 import { LunchOfferStore } from "./LunchOfferStore";
-import { NaLunchApi } from "../api/NaLunchApi";
+import { NaLunchApi } from "../api";
 import { adaptLunchOffer } from "../api/adapters";
 
 const MAX_CHUNK_AGE_IN_SECONDS = 180;
@@ -137,10 +137,14 @@ export class ChunkStore {
         this._loadedAt = moment();
     }
 
-    private createLunchOfferStoreFromLunchOffer(lunchOffer: LunchOffer): LunchOfferStore {
+    private createLunchOfferStoreFromLunchOffer(lunchOffer: LunchOffer): void {
         const key = generateLunchOfferStoreKey(this._date, lunchOffer.business.slug);
-        const store = new LunchOfferStore(this, lunchOffer);
-        this.lunchOffersStores.set(key, store);
-        return store;
+
+        if (this.lunchOffersStores.has(key)) {
+            this.lunchOffersStores.get(key).setLunchOffer(lunchOffer);
+        } else {
+            const store = new LunchOfferStore(this, lunchOffer);
+            this.lunchOffersStores.set(key, store);
+        }
     }
 }
