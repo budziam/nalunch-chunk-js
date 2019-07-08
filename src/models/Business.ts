@@ -3,6 +3,7 @@ import { Location } from "./Location";
 import { Moment } from "moment";
 import { TimeInterval } from "../types";
 import { compare } from "../utils";
+import { BusinessType, BusinessSource } from "./Source";
 
 const getHours = (
     timeIntervals: BusinessTimeInterval[],
@@ -45,6 +46,7 @@ export class Business {
     public readonly minLunchPrice?: number;
     public readonly maxLunchPrice?: number;
     public readonly timeIntervals: BusinessTimeInterval[] = [];
+    public readonly source: BusinessSource;
 
     public constructor(data: Partial<Business> = {}) {
         Object.assign(this, data);

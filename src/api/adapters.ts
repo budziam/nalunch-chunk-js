@@ -8,6 +8,10 @@ import {
     Business,
     BusinessTimeInterval,
     TimeIntervalType,
+    BusinessType,
+    FacebookSource,
+    BusinessSource,
+    WebsiteSource,
 } from "../models";
 import {
     RawBusiness,
@@ -43,7 +47,26 @@ const adaptBusiness = (data: RawBusiness): Business =>
         minLunchPrice: nullToUndefined(data.min_lunch_price),
         maxLunchPrice: nullToUndefined(data.max_lunch_price),
         timeIntervals: (data.time_intervals || []).map(adaptTimeInterval),
+        source: adaptSource(nullToUndefined(data.type) as BusinessType, data.source),
     });
+
+export const adaptSource = (type: BusinessType, source: any): BusinessSource | undefined => {
+    if (type === BusinessType.Facebook) {
+        return new FacebookSource({
+            facebookUrl: source.facebook_url,
+        });
+    }
+
+    if (type === BusinessType.Website) {
+        return new WebsiteSource({
+            url: source.url,
+            dateSelector: source.date_selector,
+            foodSelector: source.food_selector,
+        });
+    }
+
+    return undefined;
+};
 
 const adaptPublication = (data: RawPublication): Publication =>
     new Publication({

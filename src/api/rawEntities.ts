@@ -1,4 +1,4 @@
-import { Coordinates } from "../types";
+import { Coordinates, Dict } from "../types";
 
 export interface RawLunchOffer {
     business: RawBusiness;
@@ -21,6 +21,8 @@ export interface RawBusiness {
     min_lunch_price: number | null;
     max_lunch_price: number | null;
     time_intervals: RawTimeInterval[];
+    type: string;
+    source: Dict<string>;
 }
 
 export interface RawTimeInterval {
