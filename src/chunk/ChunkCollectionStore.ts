@@ -54,7 +54,7 @@ export class ChunkCollectionStore {
     public async load(
         coordinates: Coordinates,
         date: Moment,
-        radiusInMeters: number,
+        radiusInMeters: number = 5000,
     ): Promise<void> {
         const promises = this.getMatchingChunkStores(coordinates, date, radiusInMeters).map(
             chunkStore => chunkStore.load(),
