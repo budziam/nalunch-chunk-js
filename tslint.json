@@ -24,6 +24,7 @@
     "no-any": false,
     "no-console": false,
     "no-duplicate-imports": [true, {"allow-namespace-imports": true}],
+    "no-implicit-dependencies": [true, "dev"],
     "no-import-side-effect": false,
     "no-inferrable-types": false,
     "no-magic-numbers": false,
