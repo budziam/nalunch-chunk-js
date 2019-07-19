@@ -3,7 +3,7 @@
     "target": "esnext",
     "moduleResolution": "node",
     "module": "commonjs",
-    "outDir": "./lib",
+    "outDir": "./dist",
     "alwaysStrict": true,
     "declaration": true,
     "downlevelIteration": true,

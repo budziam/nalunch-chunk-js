@@ -10,7 +10,6 @@
     "tslint-config-prettier"
   ],
   "rules": {
-    "ban-ts-ignore": false,
     "comment-format": false,
     "completed-docs": false,
     "file-name-casing": [
