@@ -1,0 +1,7 @@
+{
+    "*.ts": [
+        "yarn pretty:fix",
+        "yarn lint:fix",
+        "git add"
+    ]
+}
