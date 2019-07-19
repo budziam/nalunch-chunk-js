@@ -1,4 +1,4 @@
-# NaLunch SDK JS [![CircleCI](https://circleci.com/gh/budziam/nalunch-chunk-js.svg?style=svg)](https://circleci.com/gh/budziam/nalunch-chunk-js)
+# NaLunch SDK JS [![CircleCI](https://circleci.com/gh/budziam/nalunch-sdk-js.svg?style=svg)](https://circleci.com/gh/budziam/nalunch-sdk-js)
 SDK for developing application based on [NaLunch](https://nalunch.com) provided data.
 
 ## Usage
