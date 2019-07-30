@@ -19,4 +19,12 @@ export class EnrichedSlug {
     public toString(): string {
         return createEnrichedSlug(this.slug, this.coordinates);
     }
+
+    public isSame(enrichedSlug: EnrichedSlug): boolean {
+        return (
+            this.slug === enrichedSlug.slug &&
+            this.coordinates.longitude === enrichedSlug.coordinates.longitude &&
+            this.coordinates.latitude === enrichedSlug.coordinates.latitude
+        );
+    }
 }
