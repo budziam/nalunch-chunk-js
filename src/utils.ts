@@ -30,8 +30,7 @@ export const slugify = (text: string): string =>
         .replace(/[^A-Za-z0-9]+/g, "-");
 
 export const nullToUndefined = <T>(value: T): Exclude<T, null> | undefined =>
-    // @ts-ignore
-    value === null ? undefined : value;
+    (value === null ? undefined : value) as Exclude<T, null>;
 
 export const compare = (a: any, b: any, asc: boolean = true): number => {
     if (a === b) {
