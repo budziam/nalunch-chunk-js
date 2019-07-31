@@ -46,7 +46,8 @@ describe("enrichedSlugUtils", () => {
                     latitude,
                     longitude,
                 });
-                const [parsedSlug, chunkCoordinates] = parseEnrichedSlug(enrichedSlug);
+                const tuple = parseEnrichedSlug(enrichedSlug)!;
+                const [parsedSlug, chunkCoordinates] = tuple;
 
                 const latitudeDiff = latitude - chunkCoordinates.latitude;
                 const longitudeDiff = longitude - chunkCoordinates.longitude;
