@@ -17,11 +17,11 @@ export class BusinessTimeInterval {
     }
 
     public get isAvailable(): boolean {
-        return this.hasStartTime() || this.hasEndTime();
+        return !!this.startTime || !!this.endTime;
     }
 
     public get startDate(): Moment | undefined {
-        if (this.hasStartTime()) {
+        if (this.startTime) {
             return timeToDate(this.startTime).day(this.day);
         }
 
@@ -29,18 +29,10 @@ export class BusinessTimeInterval {
     }
 
     public get endDate(): Moment | undefined {
-        if (this.hasEndTime()) {
+        if (this.endTime) {
             return timeToDate(this.endTime).day(this.day);
         }
 
         return undefined;
-    }
-
-    private hasStartTime(): boolean {
-        return this.startTime !== undefined;
-    }
-
-    private hasEndTime(): boolean {
-        return this.endTime !== undefined;
     }
 }

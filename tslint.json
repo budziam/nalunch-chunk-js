@@ -10,6 +10,7 @@
     "tslint-config-prettier"
   ],
   "rules": {
+    "ban-ts-ignore": false,
     "comment-format": false,
     "completed-docs": false,
     "file-name-casing": [
@@ -28,6 +29,8 @@
     "no-import-side-effect": false,
     "no-inferrable-types": false,
     "no-magic-numbers": false,
+    "no-non-null-assertion": false,
+    "no-null-undefined-union": false,
     "no-parameter-properties": false,
     "no-unbound-method": false,
     "no-unsafe-any": false,

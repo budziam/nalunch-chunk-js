@@ -29,7 +29,9 @@ export const slugify = (text: string): string =>
         .trim()
         .replace(/[^A-Za-z0-9]+/g, "-");
 
-export const nullToUndefined = <T>(value: T): T => (value === null ? undefined : value);
+// @ts-ignore
+export const nullToUndefined = <T>(value: T): Exclude<T, null> | undefined =>
+    value === null ? undefined : value;
 
 export const compare = (a: any, b: any, asc: boolean = true): number => {
     if (a === b) {

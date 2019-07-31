@@ -74,7 +74,7 @@ export class ChunkStore {
     public get lunchOffers(): LunchOffer[] {
         return [...this.lunchOffersStores.values()]
             .filter(lunchOfferStore => lunchOfferStore.exists)
-            .map(lunchOfferStore => lunchOfferStore.lunchOffer);
+            .map(lunchOfferStore => lunchOfferStore.lunchOffer) as LunchOffer[];
     }
 
     @boundMethod
@@ -131,10 +131,7 @@ export class ChunkStore {
 
         for (const lunchOffer of lunchOffers) {
             const key = generateLunchOfferStoreKey(this._date, lunchOffer.business.slug);
-            const store: LunchOfferStore = cloned.has(key)
-                ? cloned.get(key)
-                : new LunchOfferStore(this);
-
+            const store = cloned.get(key) || new LunchOfferStore(this);
             store.setLunchOffer(lunchOffer);
             this.lunchOffersStores.set(key, store);
         }

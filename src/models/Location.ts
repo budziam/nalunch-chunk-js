@@ -11,17 +11,13 @@ export class Location {
 
     public get coordinates(): Coordinates {
         return {
-            latitude: this.latitude,
-            longitude: this.longitude,
+            latitude: this.latitude!,
+            longitude: this.longitude!,
             label: this.label,
         };
     }
 
-    public get isEmpty(): boolean {
-        return this.latitude === undefined && this.longitude === undefined;
-    }
-
-    public equals(coordinates?: Coordinates): boolean {
+    public equals(coordinates: Coordinates | undefined): boolean {
         if (!coordinates) {
             return this.latitude === undefined && this.longitude === undefined;
         }
