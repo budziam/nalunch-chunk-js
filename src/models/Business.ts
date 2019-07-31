@@ -52,6 +52,14 @@ export class Business {
         Object.assign(this, data);
     }
 
+    public get fullAddress(): string {
+        return `${this.address}, ${this.city}`;
+    }
+
+    public get hasLocation(): boolean {
+        return !!this.location && !!this.location.latitude && !!this.location.longitude;
+    }
+
     public getOpeningHours(date: Moment): TimeInterval[] {
         return getHours(this.timeIntervals, date, TimeIntervalType.Opening);
     }
