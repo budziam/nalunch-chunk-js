@@ -31,7 +31,7 @@ export class ChunkCollectionStore {
     public get loadedAt(): Moment | undefined {
         const dates = [...this.chunksStores.values()]
             .map(chunkStore => chunkStore.loadedAt)
-            .filter(date => date !== undefined);
+            .filter(date => date !== undefined) as Moment[];
 
         if (dates.length === 0) {
             return undefined;
@@ -102,6 +102,6 @@ export class ChunkCollectionStore {
             this.chunksStores.set(key, this.chunkStoreFactory.create(coordinates, date));
         }
 
-        return this.chunksStores.get(key);
+        return this.chunksStores.get(key)!;
     }
 }

@@ -40,7 +40,7 @@ const adaptBusiness = (data: RawBusiness): Business =>
         phoneNumber: nullToUndefined(data.phone_number),
         location: adaptLocation(data.location),
         address: nullToUndefined(data.address),
-        city: data.city,
+        city: nullToUndefined(data.city),
         zipCode: nullToUndefined(data.zip_code),
         coverImageUrl: nullToUndefined(data.cover_image_url),
         teaserImageUrl: nullToUndefined(data.teaser_image_url),
@@ -106,7 +106,7 @@ const adaptDate = (text: string | undefined | null): Moment | undefined => {
     return date;
 };
 
-export const adaptLocation = (coordinates: Coordinates): Location => {
+export const adaptLocation = (coordinates: Coordinates | undefined): Location => {
     if (coordinates === undefined) {
         return new Location();
     }

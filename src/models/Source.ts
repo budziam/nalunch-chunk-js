@@ -6,7 +6,7 @@ export enum BusinessType {
 }
 
 export interface BusinessSource {
-    toRaw(): Dict<string>;
+    toRaw(): Dict<string | undefined>;
 }
 
 export class FacebookSource implements BusinessSource {
@@ -16,7 +16,7 @@ export class FacebookSource implements BusinessSource {
         Object.assign(this, data);
     }
 
-    public toRaw(): Dict<string> {
+    public toRaw(): Dict<string | undefined> {
         return {
             facebook_url: this.facebookUrl || undefined,
         };
@@ -32,7 +32,7 @@ export class WebsiteSource implements BusinessSource {
         Object.assign(this, data);
     }
 
-    public toRaw(): Dict<string> {
+    public toRaw(): Dict<string | undefined> {
         return {
             url: this.url || undefined,
             date_selector: this.dateSelector || undefined,
