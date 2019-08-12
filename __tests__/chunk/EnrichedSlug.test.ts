@@ -48,7 +48,7 @@ describe("Enriched slug", () => {
 
         const foobar = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
-            longitude: 10.51,
+            longitude: 10.56,
         });
 
         // when
