@@ -4,7 +4,6 @@ import { Food, FoodType } from "./Food";
 import { Publication } from "./Publication";
 import { DATE_FORMAT } from "../constants";
 import { slugify } from "../utils";
-import { createEnrichedSlug } from "../chunk/enrichedSlugUtils";
 
 export class LunchOffer {
     public readonly date: Moment;
@@ -22,10 +21,14 @@ export class LunchOffer {
     }
 
     public get url(): string {
+        return `https://nalunch.com/mapa${this.urlPath}`;
+    }
+
+    public get urlPath(): string {
         const city = slugify(this.business.city);
         const date = this.date.format(DATE_FORMAT);
-        const slug = createEnrichedSlug(this.business.slug, this.business.location.coordinates);
-        return `/${city}/${date}/${slug}`;
+        const enrichedSlug = this.business.enrichedSlug;
+        return `/${city}/${date}/${enrichedSlug}`;
     }
 
     public get soups(): Food[] {

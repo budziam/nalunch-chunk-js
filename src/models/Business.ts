@@ -3,7 +3,8 @@ import { Location } from "./Location";
 import { Moment } from "moment";
 import { TimeInterval } from "../types";
 import { compare } from "../utils";
-import { BusinessType, BusinessSource } from "./Source";
+import { BusinessSource } from "./Source";
+import { EnrichedSlug } from "../chunk";
 
 const getHours = (
     timeIntervals: BusinessTimeInterval[],
@@ -58,6 +59,10 @@ export class Business {
 
     public get hasLocation(): boolean {
         return !!this.location && !!this.location.latitude && !!this.location.longitude;
+    }
+
+    public get enrichedSlug(): EnrichedSlug {
+        return new EnrichedSlug(this.slug, this.location.coordinates);
     }
 
     public getOpeningHours(date: Moment): TimeInterval[] {
