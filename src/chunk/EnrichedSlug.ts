@@ -2,8 +2,12 @@ import { Coordinates } from "../types";
 import { createEnrichedSlug, parseEnrichedSlug } from "./enrichedSlugUtils";
 
 export class EnrichedSlug {
-    public constructor(public readonly slug: string, public readonly coordinates: Coordinates) {
+    private constructor(public readonly slug: string, public readonly coordinates: Coordinates) {
         //
+    }
+
+    public static fromParams(slug: string, coordinates: Coordinates): EnrichedSlug {
+        return EnrichedSlug.fromString(createEnrichedSlug(slug, coordinates))!;
     }
 
     public static fromString(enrichedSlug: string): EnrichedSlug | undefined {

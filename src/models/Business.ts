@@ -62,7 +62,7 @@ export class Business {
     }
 
     public get enrichedSlug(): EnrichedSlug {
-        return new EnrichedSlug(this.slug, this.location.coordinates);
+        return EnrichedSlug.fromParams(this.slug, this.location.coordinates);
     }
 
     public getOpeningHours(date: Moment): TimeInterval[] {

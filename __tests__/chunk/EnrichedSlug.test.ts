@@ -3,12 +3,12 @@ import { EnrichedSlug } from "../../src/chunk";
 describe("Enriched slug", () => {
     it("is the same if slug and coordinates are the same", () => {
         // given
-        const example = new EnrichedSlug("example", {
+        const example = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
             longitude: 10.5,
         });
 
-        const foobar = new EnrichedSlug("example", {
+        const foobar = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
             longitude: 10.5,
         });
@@ -22,12 +22,12 @@ describe("Enriched slug", () => {
 
     it("is NOT the same if slugs differs", () => {
         // given
-        const example = new EnrichedSlug("example", {
+        const example = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
             longitude: 10.5,
         });
 
-        const foobar = new EnrichedSlug("foobar", {
+        const foobar = EnrichedSlug.fromParams("foobar", {
             latitude: 10.4,
             longitude: 10.5,
         });
@@ -41,12 +41,12 @@ describe("Enriched slug", () => {
 
     it("is NOT the same if coordinates differs", () => {
         // given
-        const example = new EnrichedSlug("example", {
+        const example = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
             longitude: 10.5,
         });
 
-        const foobar = new EnrichedSlug("example", {
+        const foobar = EnrichedSlug.fromParams("example", {
             latitude: 10.4,
             longitude: 10.51,
         });
@@ -56,5 +56,19 @@ describe("Enriched slug", () => {
 
         // then
         expect(isSame).toBeFalsy();
+    });
+
+    it("has different coordinates than ones it was created from", () => {
+        // when
+        const example = EnrichedSlug.fromParams("example", {
+            latitude: 10.42343,
+            longitude: 10.501234,
+        });
+
+        // then
+        expect(example.coordinates).toEqual({
+            latitude: 10.4,
+            longitude: 10.5,
+        });
     });
 });
