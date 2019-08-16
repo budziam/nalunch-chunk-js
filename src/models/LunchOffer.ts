@@ -10,6 +10,8 @@ export class LunchOffer {
     public readonly business: Business;
     public readonly publications: Publication[] = [];
     public readonly foods: Food[] = [];
+    public readonly moderated: boolean = false;
+    public readonly score: number = 0;
 
     public constructor(data: Partial<LunchOffer> = {}) {
         Object.assign(this, data);
