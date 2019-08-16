@@ -5,6 +5,8 @@ export interface RawLunchOffer {
     publications: RawPublication[];
     foods: RawFood[];
     date: string;
+    moderated: boolean;
+    score: number;
 }
 
 export interface RawBusiness {

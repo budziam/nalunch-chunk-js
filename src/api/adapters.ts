@@ -30,6 +30,8 @@ export const adaptLunchOffer = (data: RawLunchOffer): LunchOffer =>
         publications: data.publications.map(adaptPublication),
         foods: data.foods.map(adaptFood),
         date: adaptDate(data.date),
+        moderated: data.moderated,
+        score: data.score,
     });
 
 const adaptBusiness = (data: RawBusiness): Business =>
