@@ -1,6 +1,8 @@
 .github
 .circleci
+.idea
 src
+scripts
 __tests__
 .huskyrc
 .lintstagedrc
